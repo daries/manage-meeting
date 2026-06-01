@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background -->
+  <rect width="512" height="512" rx="114" fill="#4F46E5"/>
+  <!-- Clipboard body -->
+  <rect x="136" y="158" width="240" height="288" rx="22" fill="white"/>
+  <!-- Clip top -->
+  <rect x="205" y="122" width="102" height="70" rx="14" fill="#3730A3"/>
+  <rect x="221" y="138" width="70" height="38" rx="8" fill="#6366F1"/>
+  <!-- Content lines -->
+  <rect x="176" y="242" width="160" height="14" rx="7" fill="#C7D2FE"/>
+  <rect x="176" y="278" width="128" height="14" rx="7" fill="#C7D2FE"/>
+  <rect x="176" y="314" width="144" height="14" rx="7" fill="#C7D2FE"/>
+  <rect x="176" y="350" width="108" height="14" rx="7" fill="#C7D2FE"/>
+  <!-- Check circles -->
+  <circle cx="176" cy="249" r="12" fill="#10B981"/>
+  <circle cx="176" cy="285" r="12" fill="#10B981"/>
+  <circle cx="176" cy="321" r="12" fill="#D1D5DB"/>
+  <circle cx="176" cy="357" r="12" fill="#D1D5DB"/>
+</svg>
