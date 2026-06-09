@@ -2,8 +2,7 @@
 -- Migration 001: Initial Schema
 -- ============================================================
 
--- Enable UUID extension
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+-- gen_random_uuid() built-in sejak PostgreSQL 13, tidak perlu extension
 
 -- ============================================================
 -- USERS TABLE
@@ -46,7 +45,7 @@ CREATE TABLE IF NOT EXISTS meetings (
   online_link TEXT,
   status VARCHAR(20) DEFAULT 'scheduled' CHECK (status IN ('scheduled', 'ongoing', 'completed', 'cancelled')),
   created_by UUID REFERENCES users(id) ON DELETE SET NULL,
-  attendance_token VARCHAR(100) UNIQUE DEFAULT encode(gen_random_bytes(16), 'hex'),
+  attendance_token VARCHAR(100) UNIQUE DEFAULT replace(gen_random_uuid()::text, '-', ''),
   minutes_locked BOOLEAN DEFAULT FALSE,
   search_vector tsvector,
   created_at TIMESTAMPTZ DEFAULT NOW(),
