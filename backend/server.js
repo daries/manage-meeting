@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const cron = require('node-cron');
 const path = require('path');
+const pool = require('./src/config/db');
+const runMigrations = require('./src/config/migrate');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -91,10 +93,20 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal server error' });
 });
 
-app.listen(PORT, () => {
-  const mode = isProd ? 'PRODUCTION' : 'DEVELOPMENT';
-  console.log(`[${mode}] Server berjalan di http://localhost:${PORT}`);
-  if (isProd) console.log(`Frontend served dari ../frontend/dist`);
+async function startServer() {
+  console.log('Menjalankan migrasi database...');
+  await runMigrations(pool);
+
+  app.listen(PORT, () => {
+    const mode = isProd ? 'PRODUCTION' : 'DEVELOPMENT';
+    console.log(`[${mode}] Server berjalan di http://localhost:${PORT}`);
+    if (isProd) console.log(`Frontend served dari ../frontend/dist`);
+  });
+}
+
+startServer().catch(err => {
+  console.error('Gagal start server:', err.message);
+  process.exit(1);
 });
 
 module.exports = app;
